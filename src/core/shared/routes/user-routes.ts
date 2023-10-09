@@ -4,6 +4,8 @@ import { RegisterUserController } from "../../../adapters/user/create/register-u
 import { PrismaUserRepository } from "../../../external/prisma/repository/prisma-user-repository";
 import { FindAllUsers } from "../../user/service/find-all/find-all-users";
 import { FindAllUsersController } from "../../../adapters/user/find-all/find-all-users-controller";
+import { AuthUser } from "../../user/service/auth/auth-user";
+import { AuthUserController } from "../../../adapters/user/auth/auth-user-controller";
 
 const userRoutes = express();
 
@@ -14,5 +16,8 @@ new RegisterUserController(userRoutes, registerUser);
 
 const findAllUsers = new FindAllUsers(userRepository);
 new FindAllUsersController(userRoutes, findAllUsers);
+
+const authUser = new AuthUser(userRepository);
+new AuthUserController(userRoutes, authUser);
 
 export { userRoutes };
