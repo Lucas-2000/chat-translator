@@ -1,4 +1,4 @@
-import { UserRepository } from "../../core/user/service/repository/user-repository";
+import { UserRepository } from "../../core/user/repository/user-repository";
 import { User } from "../../core/user/model/user";
 import { randomUUID } from "crypto";
 

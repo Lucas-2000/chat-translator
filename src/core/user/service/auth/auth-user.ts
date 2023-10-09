@@ -1,7 +1,7 @@
 import { compare } from "bcrypt";
 import { UseCase } from "../../../shared/interfaces/use-case";
 import { User } from "../../model/user";
-import { UserRepository } from "../repository/user-repository";
+import { UserRepository } from "../../repository/user-repository";
 
 type Data = {
   username: string;

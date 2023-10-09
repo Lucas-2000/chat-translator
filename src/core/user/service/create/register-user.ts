@@ -1,4 +1,4 @@
-import { UserRepository } from "../repository/user-repository";
+import { UserRepository } from "../../repository/user-repository";
 import { UseCase } from "../../../shared/interfaces/use-case";
 import { randomUUID } from "crypto";
 import bcrypt from "bcrypt";
