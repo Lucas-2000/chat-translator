@@ -1,6 +1,7 @@
 import { UseCase } from "../../../shared/interfaces/use-case";
 import { User } from "../../model/user";
 import { UserRepository } from "../../repository/user-repository";
+import bcrypt from "bcrypt";
 
 type Data = {
   id: string;
@@ -21,12 +22,18 @@ export class UpdateUser implements UseCase<Data, User | null> {
 
     if (!user) throw new Error("User not found");
 
+    if (password.length < 7)
+      throw new Error("Password must be at least 8 characters");
+
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
+
     await this.userRepository.update({
       id,
       name,
       username,
       email,
-      password,
+      password: hashedPassword,
       language,
     });
 
