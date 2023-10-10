@@ -10,6 +10,8 @@ import { UpdateUserController } from "../../../adapters/user/update/update-user-
 import { UpdateUser } from "../../user/service/update/update-user";
 import { FindUserById } from "../../user/service/find-by-id/find-user-by-id";
 import { FindUserByIdController } from "../../../adapters/user/find-by-id/find-user-by-id-controller";
+import { DeleteUser } from "../../user/service/delete/delete-user";
+import { DeleteUserController } from "../../../adapters/user/delete/delete-user-controller";
 
 const userRoutes = express();
 
@@ -29,5 +31,8 @@ new UpdateUserController(userRoutes, updateUser);
 
 const findUserById = new FindUserById(userRepository);
 new FindUserByIdController(userRoutes, findUserById);
+
+const deleteUser = new DeleteUser(userRepository);
+new DeleteUserController(userRoutes, deleteUser);
 
 export { userRoutes };
