@@ -8,6 +8,8 @@ import { AuthUser } from "../../user/service/auth/auth-user";
 import { AuthUserController } from "../../../adapters/user/auth/auth-user-controller";
 import { UpdateUserController } from "../../../adapters/user/update/update-user-controller";
 import { UpdateUser } from "../../user/service/update/update-user";
+import { FindUserById } from "../../user/service/find-by-id/find-user-by-id";
+import { FindUserByIdController } from "../../../adapters/user/find-by-id/find-user-by-id-controller";
 
 const userRoutes = express();
 
@@ -24,5 +26,8 @@ new AuthUserController(userRoutes, authUser);
 
 const updateUser = new UpdateUser(userRepository);
 new UpdateUserController(userRoutes, updateUser);
+
+const findUserById = new FindUserById(userRepository);
+new FindUserByIdController(userRoutes, findUserById);
 
 export { userRoutes };
