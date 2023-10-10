@@ -9,7 +9,7 @@ export class AuthUserController {
 
       const user = await useCase.execute({ username, password });
 
-      res.status(201).json(user);
+      res.status(200).json(user);
     });
   }
 }

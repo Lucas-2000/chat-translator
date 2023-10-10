@@ -6,7 +6,7 @@ export class FindAllUsersController {
     server.get("/users", async (req: Request, res: Response) => {
       const users = await useCase.execute();
 
-      res.status(201).json(users);
+      res.status(200).json(users);
     });
   }
 }

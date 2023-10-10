@@ -8,7 +8,7 @@ export class FindUserByIdController {
 
       const user = await useCase.execute({ id });
 
-      res.status(201).json(user);
+      res.status(200).json(user);
     });
   }
 }
