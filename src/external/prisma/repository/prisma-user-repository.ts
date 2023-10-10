@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import { User } from "../../../core/user/model/user";
 import { UserRepository } from "../../../core/user/repository/user-repository";
 import { prisma } from "../../../core/shared/config/prismaClient";
@@ -32,8 +31,8 @@ export class PrismaUserRepository implements UserRepository {
     });
   }
 
-  async create(user: User): Promise<User> {
-    return await prisma.user.create({
+  async create(user: User): Promise<void> {
+    await prisma.user.create({
       data: user,
     });
   }
