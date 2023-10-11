@@ -4,6 +4,7 @@ import cors from "cors";
 import { userRoutes } from "./core/shared/routes/user-routes";
 import { error } from "./core/shared/errors/error";
 import { roomRoutes } from "./core/shared/routes/room-routes";
+import { roomUserRoutes } from "./core/shared/routes/room-user-routes";
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 // registrando as rotas do sistema
 app.use(userRoutes);
 app.use(roomRoutes);
+app.use(roomUserRoutes);
 
 // middleware para lidar com erros
 app.use(error);
