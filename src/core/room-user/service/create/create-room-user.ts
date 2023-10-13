@@ -19,6 +19,12 @@ export class CreateRoomUser implements UseCase<Data, void> {
   async execute(data: Data): Promise<void> {
     const { roomId, userId } = data;
 
+    const roomUserCount = await this.roomUserRepository.count(roomId);
+
+    if (roomUserCount >= 2) {
+      throw new Error("Room is full");
+    }
+
     // gerar um uuid aleatório para a sala
     const id = randomUUID();
 

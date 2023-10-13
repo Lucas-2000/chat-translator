@@ -1,5 +1,4 @@
 import { Express, Request, Response } from "express";
-import { RegisterUser } from "../../../core/user/service/create/register-user";
 import { AuthUser } from "../../../core/user/service/auth/auth-user";
 
 export class AuthUserController {

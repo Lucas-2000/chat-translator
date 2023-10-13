@@ -1,11 +1,11 @@
 import express from "express";
-import { PrismaRoomRepository } from "../../../external/prisma/repository/prisma-room-repository";
-import { CreateRoom } from "../../room/service/create/create-room";
-import { CreateRoomController } from "../../../adapters/room/create/create-room-controller";
-import { FindAllRooms } from "../../room/service/find-all/find-all-rooms";
-import { FindAllRoomsController } from "../../../adapters/room/find-all/find-all-rooms-controller";
-import { DeleteRoom } from "../../room/service/delete/delete-room";
-import { DeleteRoomController } from "../../../adapters/room/delete/delete-room-controller";
+import { PrismaRoomRepository } from "../external/prisma/repository/prisma-room-repository";
+import { CreateRoom } from "../core/room/service/create/create-room";
+import { CreateRoomController } from "../adapters/room/create/create-room-controller";
+import { FindAllRooms } from "../core/room/service/find-all/find-all-rooms";
+import { FindAllRoomsController } from "../adapters/room/find-all/find-all-rooms-controller";
+import { DeleteRoom } from "../core/room/service/delete/delete-room";
+import { DeleteRoomController } from "../adapters/room/delete/delete-room-controller";
 
 const roomRoutes = express();
 

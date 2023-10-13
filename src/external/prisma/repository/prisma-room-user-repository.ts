@@ -23,6 +23,16 @@ export class PrismaRoomUserRepository implements RoomUserRepository {
     return roomUser;
   }
 
+  async count(id: string): Promise<number> {
+    const total = await prisma.roomUser.count({
+      where: {
+        roomId: id,
+      },
+    });
+
+    return total;
+  }
+
   async delete(id: string): Promise<void | null> {
     const existingRoomUser = await prisma.roomUser.findUnique({
       where: {

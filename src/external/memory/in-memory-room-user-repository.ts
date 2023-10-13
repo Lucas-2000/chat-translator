@@ -13,6 +13,18 @@ export class InMemoryRoomUserRepository implements RoomUserRepository {
     return this.roomUsers.find((roomUsers) => roomUsers.id === id) ?? null;
   }
 
+  async count(id: string): Promise<number> {
+    let acc = 0;
+    this.roomUsers.forEach((roomUsers) => {
+      if (roomUsers.id === id) {
+        acc++;
+      }
+
+      return acc;
+    });
+    return acc;
+  }
+
   async create(roomUsers: RoomUser): Promise<void> {
     const newRoomUser = { ...roomUsers, id: randomUUID() };
     this.roomUsers.push(newRoomUser);
