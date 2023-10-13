@@ -1,7 +1,6 @@
-import { User } from "../../user/model/user";
 import { Nodo } from "./nodo";
 
-export class Enqueue {
+export class Queue {
   front: Nodo | null;
   rear: Nodo | null;
 
@@ -10,7 +9,7 @@ export class Enqueue {
     this.rear = rear;
   }
 
-  store(data: User): void {
+  store(data: string): void {
     const nodo = new Nodo(data, null);
 
     if (this.rear === null) {
@@ -22,7 +21,7 @@ export class Enqueue {
     }
   }
 
-  retrieve(): User | null {
+  retrieve(): string | null {
     if (this.front === null) {
       this.rear = null;
       return null;
@@ -57,7 +56,7 @@ export class Enqueue {
     return count;
   }
 
-  first(): User | null {
+  first(): string | null {
     if (this.front === null) {
       return null;
     }
@@ -65,7 +64,7 @@ export class Enqueue {
     return this.front.data;
   }
 
-  last(): User | null {
+  last(): string | null {
     if (this.rear === null) {
       return null;
     }
