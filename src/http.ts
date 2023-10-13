@@ -8,6 +8,8 @@ import { roomRoutes } from "./routes/room-routes";
 import { roomUserRoutes } from "./routes/room-user-routes";
 import path from "path";
 import { Server } from "socket.io";
+import { UserAdd } from "./core/shared/interfaces/user-add";
+import { Message } from "./core/shared/interfaces/message";
 
 const app = express();
 
@@ -30,25 +32,15 @@ const serverHttp = http.createServer(app);
 const io = new Server(serverHttp);
 
 io.on("connection", (socket) => {
-  socket.on("userAdded", (data) => {
-    handleUserAdded(data);
-  });
-
-  function handleUserAdded(data: any) {
-    const { roomId, userId } = data;
+  socket.on("userAdded", ({ roomId, userId }: UserAdd) => {
     socket.join(roomId);
     io.to(roomId).emit("userEntered", { roomId, userId });
-  }
-
-  socket.on("sendMessage", (messageData) => {
-    handleSendMessage(messageData);
   });
 
-  function handleSendMessage(messageData: any) {
-    const { roomId, userId, message } = messageData;
+  socket.on("sendMessage", ({ roomId, userId, message }: Message) => {
     socket.join(roomId);
     io.to(roomId).emit("messageReceived", { roomId, userId, message });
-  }
+  });
 });
 
 export { serverHttp, io };
