@@ -18,8 +18,6 @@ export class JoinQueue implements UseCase<Data, void> {
 
     const userIsAlreadyOnQueue = await this.queue.isUserInQueue(userId);
 
-    console.log(userIsAlreadyOnQueue);
-
     if (userIsAlreadyOnQueue) throw new Error("User is already on queue");
 
     try {
