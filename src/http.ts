@@ -10,6 +10,7 @@ import path from "path";
 import { Server } from "socket.io";
 import { UserAdd } from "./core/shared/interfaces/user-add";
 import { Message } from "./core/shared/interfaces/message";
+import { queueRoutes } from "./routes/queue-routes";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.use(userRoutes);
 app.use(roomRoutes);
 app.use(roomUserRoutes);
+app.use(queueRoutes);
 
 // middleware para lidar com erros
 app.use(error);

@@ -8,6 +8,7 @@ import { FindAllRoomUsers } from "../core/room-user/service/find-all/find-all-ro
 import { FindAllRoomUsersController } from "../adapters/room-user/find-all/find-all-room-users-controller";
 import { DeleteRoomUser } from "../core/room-user/service/delete/delete-room-user";
 import { DeleteRoomUserController } from "../adapters/room-user/delete/delete-room-user-controller";
+import { queueInstance } from "../core/shared/queue/queue-instance";
 
 const roomUserRoutes = express();
 
@@ -18,7 +19,8 @@ const roomUserRepository = new PrismaRoomUserRepository();
 const createRoomUser = new CreateRoomUser(
   roomUserRepository,
   roomRepository,
-  userRepository
+  userRepository,
+  queueInstance
 );
 new CreateRoomUserController(roomUserRoutes, createRoomUser);
 

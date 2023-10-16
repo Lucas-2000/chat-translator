@@ -6,7 +6,7 @@ export class CreateRoomUserController {
     server.post("/room-users", async (req: Request, res: Response) => {
       const { roomId, userId } = req.body;
 
-      await useCase.execute({ roomId, userId });
+      const response = await useCase.execute({ roomId, userId });
 
       res.status(201).json({ msg: "Room User created successfully" });
     });
