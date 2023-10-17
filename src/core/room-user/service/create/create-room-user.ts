@@ -7,7 +7,8 @@ import { Queue } from "../../../shared/queue/queue";
 
 type Data = {
   roomId: string;
-  userId: string;
+  userId1: string;
+  userId2: string;
 };
 
 export class CreateRoomUser implements UseCase<Data, void> {
@@ -19,7 +20,7 @@ export class CreateRoomUser implements UseCase<Data, void> {
   ) {}
 
   async execute(data: Data): Promise<void> {
-    const { roomId, userId } = data;
+    const { roomId, userId1, userId2 } = data;
 
     const roomUserCount = await this.roomUserRepository.count(roomId);
 
@@ -31,11 +32,15 @@ export class CreateRoomUser implements UseCase<Data, void> {
 
     if (!room) throw new Error("Room not found");
 
-    const user = await this.userRepository.findById(userId);
+    const userExists1 = await this.userRepository.findById(userId1);
 
-    if (!user) throw new Error("User not found");
+    if (!userExists1) throw new Error("User 1 not found");
 
-    const queueSize = this.queue.size();
+    const userExists2 = await this.userRepository.findById(userId2);
+
+    if (!userExists2) throw new Error("User 2 not found");
+
+    const queueSize = (await this.queue.getQueue()).length;
 
     if (queueSize < 2) throw new Error("Queue size must be at least 2");
 

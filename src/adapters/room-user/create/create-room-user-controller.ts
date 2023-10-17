@@ -4,9 +4,9 @@ import { CreateRoomUser } from "../../../core/room-user/service/create/create-ro
 export class CreateRoomUserController {
   constructor(server: Express, useCase: CreateRoomUser) {
     server.post("/room-users", async (req: Request, res: Response) => {
-      const { roomId, userId } = req.body;
+      const { roomId, userId1, userId2 } = req.body;
 
-      const response = await useCase.execute({ roomId, userId });
+      await useCase.execute({ roomId, userId1, userId2 });
 
       res.status(201).json({ msg: "Room User created successfully" });
     });

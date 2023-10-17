@@ -6,7 +6,7 @@ socket.on("connect", () => {
 
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get("roomId");
-const userId = urlParams.get("userId");
+const userId = urlParams.get("userId1");
 
 if (roomId && userId) {
   console.log(`Room ID: ${roomId}`);
@@ -20,17 +20,24 @@ if (roomId && userId) {
 socket.on("messageReceived", (data) => {
   const chatMessages = document.getElementById("chatMessages");
   const messageDiv = document.createElement("div");
-  messageDiv.textContent = `${data.userId}: ${data.message}`;
+  messageDiv.textContent = `${data.userId}: ${data.translatedText}`;
   chatMessages.appendChild(messageDiv);
 });
 
-document.getElementById("messageForm").addEventListener("submit", (e) => {
+document.getElementById("messageForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const message = document.getElementById("message").value;
 
+  const response = await axios.post("http://localhost:3333/translation", {
+    userId,
+    message,
+  });
+
+  const translatedText = response.data.translatedText;
+
   if (roomId && userId) {
-    socket.emit("sendMessage", { roomId, userId, message });
+    socket.emit("sendMessage", { roomId, userId, translatedText });
     document.getElementById("message").value = "";
   } else {
     console.error("Missing parameters (roomId or userId)");

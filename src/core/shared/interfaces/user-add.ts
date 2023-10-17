@@ -1,4 +1,4 @@
 export interface UserAdd {
-  userId: string;
+  userId1: string;
   roomId: string;
 }

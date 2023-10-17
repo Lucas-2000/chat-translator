@@ -11,6 +11,7 @@ import { Server } from "socket.io";
 import { UserAdd } from "./core/shared/interfaces/user-add";
 import { Message } from "./core/shared/interfaces/message";
 import { queueRoutes } from "./routes/queue-routes";
+import { translationRoutes } from "./routes/translation-routes";
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(userRoutes);
 app.use(roomRoutes);
 app.use(roomUserRoutes);
 app.use(queueRoutes);
+app.use(translationRoutes);
 
 // middleware para lidar com erros
 app.use(error);
@@ -34,14 +36,14 @@ const serverHttp = http.createServer(app);
 const io = new Server(serverHttp);
 
 io.on("connection", (socket) => {
-  socket.on("userAdded", ({ roomId, userId }: UserAdd) => {
+  socket.on("userAdded", ({ roomId, userId1 }: UserAdd) => {
     socket.join(roomId);
-    io.to(roomId).emit("userEntered", { roomId, userId });
+    io.to(roomId).emit("userEntered", { roomId, userId1 });
   });
 
-  socket.on("sendMessage", ({ roomId, userId, message }: Message) => {
+  socket.on("sendMessage", ({ roomId, userId, translatedText }: Message) => {
     socket.join(roomId);
-    io.to(roomId).emit("messageReceived", { roomId, userId, message });
+    io.to(roomId).emit("messageReceived", { roomId, userId, translatedText });
   });
 });
 
