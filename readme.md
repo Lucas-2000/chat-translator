@@ -14,6 +14,7 @@
 - [Prisma ORM](https://www.prisma.io)
 - [Redis](https://redis.io)
 - [Socket.io](https://socket.io)
+- [JWT](https://jwt.io)
 
 ## 💨 How to run the server
 
